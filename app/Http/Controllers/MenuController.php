@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use App\Models\Role;
 use App\Models\User;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use SebastianBergmann\Environment\Console;
+use Symfony\Component\Console\Input\Input;
 
 class MenuController extends Controller
 {
@@ -57,6 +60,31 @@ class MenuController extends Controller
         );
 
         return redirect(route('menus'))->with('pesan', $pesan);
+    }
+
+    public function saveMenuAjax(Request $request)
+    {
+        $menu = Menu::create([
+            'role_id' => $request->role_id,
+            'name' => $request->name,
+            'identifier' => Str::slug($request->name, '-'),
+            'icon' => $request->icon,
+            'link' => $request->link,
+            'desc' => $request->desc
+        ]);
+
+        if($menu)
+        {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tambah Data Berhasil'
+            ], 200);
+        }else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Tambah Data Gagal'
+            ], 400);
+        }
     }
 
     public function edit(Menu $menu)

@@ -11,11 +11,11 @@
     <title>Login</title>
 </head>
 <body>
-    <div class="container h-100">
-        <div class="row py-4 h-100">
-            <div class="col-md-6 mx-auto">
-                <div class="card">
-                    <div class="card-header text-center"><strong>Login</strong></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-6 mx-auto">
+                <div class="card bg-light mt-5 p-3">
+                    <div class="card-header text-center bg-light"><strong>Login</strong></div>
                     <div class="card-body">
                         <form action="{{ route('login') }}" method="POST">
                             @csrf
@@ -56,7 +56,10 @@
                             </div>
                         </form>
                     </div>
-                    <div class="card-footer text-center">
+                    <div class="card-footer text-center bg-light">
+                        <div class="col-md-12">
+                            <p class="text-center mb-0 text-muted"><small>Belum Punya Akun ? <a href="{{ route('register') }}">Register</a></small></p>
+                        </div>
                         @if (Session::get('pesan'))
                             <script>
                                 const title = "{{ Session::get('pesan')['title'] }}";

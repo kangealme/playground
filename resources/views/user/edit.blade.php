@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Tambah Pengguna')
+@section('title', 'Edit Pengguna')
 
 @section('content')
     <script>
@@ -80,6 +80,7 @@
                                     name="password"
                                     id="password"
                                     class="form-control @error('password') is-invalid  @enderror"
+                                    value="{{ $pengguna->password ?? old('password') }}"
                                     placeholder="Password"
                                 >
                                 @error('password')
@@ -147,16 +148,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-10">
-                                <input
-                                    type="text"
-                                    name="address"
-                                    id="address"
-                                    class="form-control"
-                                    value="{{ $pengguna->address }}"
-                                    placeholder="Alamat"
-                                />
-                            </div>
+
                         </div>
                     </div>
                 </div>

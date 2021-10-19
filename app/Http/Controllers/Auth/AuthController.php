@@ -30,6 +30,11 @@ class AuthController extends Controller
         }
     }
 
+    public function registerView()
+    {
+        return view('auth.register');
+    }
+
     public function register()
     {
         $validated = request()->validate([
@@ -47,7 +52,12 @@ class AuthController extends Controller
         $user->password = Hash::make(request()->password);
         $user->save();
 
-        return redirect(route('login'))->with('pesan', 'User terdaftar, mintalah aktivasi pada admin');
+        $pesan = array(
+            'title' => 'Terimakasih',
+            'text' => 'User terdaftar, mintalah aktivasi pada admin',
+            'icon' => 'success',
+        );
+        return redirect(route('login'))->with('pesan', $pesan);
     }
 
     public function logout()

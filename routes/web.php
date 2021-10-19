@@ -28,7 +28,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'login_form'])->name('login');
     Route::get('/login', [AuthController::class, 'login_form'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
-    Route::view('/register', 'auth.register')->name('register');
+    Route::get('/register', [AuthController::class, 'registerView'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
 
 Route::middleware('auth')->group(function () {
@@ -64,6 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/menus', [MenuController::class, 'index'])->name('menus');
     Route::get('/menu/add', [MenuController::class, 'addMenu'])->name('menu.add');
     Route::post('/menu/save', [MenuController::class, 'saveMenu'])->name('menu.save');
+    Route::post('/menu/ajax/save', [MenuController::class, 'saveMenuAjax'])->name('menu.ajax.save');
     Route::get('/menu/edit/{menu:identifier}', [MenuController::class, 'edit'])->name('menu.edit');
     Route::put('/menu/update/{menu:identifier}', [MenuController::class, 'update'])->name('menu.update');
     Route::delete('/menu/delete/{menu:identifier}', [MenuController::class, 'drop'])->name('menu.delete');

@@ -36,6 +36,33 @@
                     <th scope="col">AKSI</th>
                 </tr>
             </thead>
+            <tbody>
+                @foreach ($menus as $menu)
+                    <tr>
+                        <th scope="row" class="text-center">{{ $loop->iteration }}</th>
+                        <td>{{ $menu->role_id }}</td>
+                        <td>{{ $menu->name }}</td>
+                        <td>{{ $menu->icon }}</td>
+                        <td class="text-center"><i class="{{ $menu->icon }}"></i></td>
+                        <td>{{ $menu->link }}</td>
+                        <td>{{ $menu->desc }}</td>
+                        <td style="min-width: 90px">
+                            <a href="{{ route('menu.edit', $menu->identifier) }}" class="badge rounded-pill bg-warning">Edit</a>
+                            <form
+                                action="{{ route('menu.delete', $menu->identifier) }}" method="POST"
+                                class="d-inline"
+                            >
+                                @csrf
+                                @method('delete')
+
+                                <button type="submit" class="badge rounded-pill bg-danger">
+                                    Hapus
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 
